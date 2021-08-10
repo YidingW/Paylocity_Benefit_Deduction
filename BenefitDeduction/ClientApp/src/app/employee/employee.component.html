@@ -1,0 +1,53 @@
+<div class="site-page-header-ghost-wrapper" *ngIf="employee">
+  <nz-page-header nzBackIcon>
+    <nz-page-header-title>{{employee.firstName}} {{employee.lastName}}</nz-page-header-title>
+    <nz-page-header-subtitle>Dependants: {{employee.numberOfDependants}}</nz-page-header-subtitle>
+    <nz-page-header-extra>
+      <button nz-button nzType="primary" (click)="createNewDependantModal()">
+        <i nz-icon nzType="plus-circle" nzTheme="twotone"></i> Add Dependant
+      </button>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+      <nz-row>
+        <nz-statistic nzTitle="Status" nzValue="Active"></nz-statistic>
+        <nz-statistic nzTitle="Annual Pay before deductions" [nzValue]="employee.paycheck.totalPay" nzPrefix="$" style="margin: 0 32px"></nz-statistic>
+        <nz-statistic nzTitle="Annual Benefit Cost" [nzValue]="employee.paycheck.totalCost" nzPrefix="$" style="margin: 0 32px"></nz-statistic>
+        <nz-statistic nzTitle="Annual Pay after deductions" [nzValue]="employee.paycheck.totalPayAfterCost" nzPrefix="$" style="margin: 0 32px"></nz-statistic>
+      </nz-row>
+
+      <div *ngIf="employee.dependants.length>0">
+        <nz-divider></nz-divider>
+
+        <h3>Dependants</h3>
+        <nz-descriptions *ngFor="let dependant of employee.dependants" [nzColumn]="3">
+          <nz-descriptions-item nzTitle="First Name">{{dependant.firstName}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Last Name">{{dependant.lastName}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Relationship">{{dependant.type}}</nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+
+    </nz-page-header-content>
+  </nz-page-header>
+
+  <nz-divider></nz-divider>
+
+  <h3>Paycheck details</h3>
+  <nz-table nzSize="middle" nzTemplateMode="false" [nzData]="employee.paycheck.pays" nzShowPagination="false" nzFrontPagination="false">
+    <thead>
+    <tr>
+      <th>Paycheck #</th>
+      <th>Amount before deduction</th>
+      <th>Benefit Deduction</th>
+      <th>Amount after deduction</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pay of employee.paycheck.pays">
+      <td>Pay #{{pay.payNum}}</td>
+      <td>{{ pay.payBeforeCost }}</td>
+      <td>{{ pay.benefitCost }}</td>
+      <td>{{ pay.payAfterCost }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

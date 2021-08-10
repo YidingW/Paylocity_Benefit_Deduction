@@ -1,0 +1,27 @@
+<form nz-form>
+  <input nz-input type="hidden"  name="employeeId" [ngModel]="dependant.employeeId">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="type" nzRequired>Type</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group [(ngModel)]="dependant.type" name="type" nzButtonStyle="solid" required>
+        <label nz-radio-button nzValue="Spouse">Spouse</label>
+        <label nz-radio-button nzValue="Child">Child</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="firstName" nzRequired>First Name</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="firstName" type="text" id="firstName" [(ngModel)]="dependant.firstName" required>
+    </nz-form-control>
+  </nz-form-item >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="lastName" nzRequired>Last Name</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="lastName" type="text" id="lastName" required [(ngModel)]="dependant.lastName">
+    </nz-form-control>
+  </nz-form-item >
+</form>
